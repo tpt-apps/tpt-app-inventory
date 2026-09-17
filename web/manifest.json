@@ -1,0 +1,14 @@
+{
+  "name": "TPT Inventory — Offline Barcode Stock Count",
+  "short_name": "TPT Inventory",
+  "description": "Offline barcode stock counting for small shops and warehouses. Scan SKUs, track counts, export CSV — no internet connection needed. By TPT Solutions.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0f1115",
+  "theme_color": "#0f1115",
+  "orientation": "any",
+  "icons": [
+    { "src": "icons/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

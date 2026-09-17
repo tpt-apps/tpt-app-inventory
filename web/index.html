@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>TPT Inventory — Offline Barcode Stock Count</title>
+<meta name="description" content="Offline barcode stock counting for small shops and warehouses. Import a SKU list, scan with your phone camera, track counts, export CSV — no internet connection needed." />
+<meta name="theme-color" content="#0f1115" />
+<link rel="manifest" href="manifest.json" />
+<link rel="icon" href="icons/icon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="icons/icon.svg" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<header class="app-header">
+  <div class="brand">
+    <img src="icons/icon.svg" alt="" />
+    <span>TPT Inventory</span>
+    <span class="brand-tag">by <a href="https://tptsolutions.co.nz" target="_blank" rel="noopener">TPT Solutions</a></span>
+  </div>
+  <nav>
+    <a href="#" id="install-link" hidden>Install app</a>
+    <a href="#" id="about-link">About &amp; privacy</a>
+    <a href="https://tptsolutions.co.nz" target="_blank" rel="noopener">tptsolutions.co.nz</a>
+  </nav>
+</header>
+
+<main>
+  <section class="panel" aria-label="SKU list &amp; scanner">
+    <h2>1. SKU list</h2>
+    <label for="sku-file">Import CSV (sku[,expected_qty] per line)</label>
+    <input type="file" id="sku-file" accept=".csv,text/csv,text/plain" />
+    <label for="sku-paste">…or paste SKUs</label>
+    <textarea id="sku-paste" placeholder="SKU-00123,10&#10;SKU-00124,25&#10;SKU-00125"></textarea>
+    <div class="btn-row">
+      <button class="primary" id="load-skus-btn" type="button">Load / replace SKU list</button>
+      <button class="secondary" id="load-sample-btn" type="button">Load sample SKUs</button>
+    </div>
+    <div class="error-box" id="error-box"></div>
+
+    <h2 style="margin-top:20px;">2. Scan</h2>
+    <div class="camera-wrap">
+      <video id="video" playsinline muted></video>
+      <canvas id="overlay"></canvas>
+    </div>
+    <canvas id="capture" hidden></canvas>
+    <div class="btn-row">
+      <button class="primary" id="scan-btn" type="button">Start camera</button>
+      <button class="secondary" id="stop-btn" type="button" disabled>Stop</button>
+    </div>
+    <div class="scan-status" id="scan-status">Camera not started. Each scan adds +1 to that SKU's count — rescan to tally multiples.</div>
+    <div class="scan-flash" id="scan-flash"></div>
+  </section>
+
+  <section class="panel" aria-label="Stock count">
+    <h2>Stock count</h2>
+    <div class="stats-row">
+      <div class="stat"><span class="num" id="stat-skus">0</span><span class="label">SKUs</span></div>
+      <div class="stat"><span class="num" id="stat-counted">0</span><span class="label">Total scanned</span></div>
+      <div class="stat"><span class="num" id="stat-unexpected">0</span><span class="label">Unexpected</span></div>
+    </div>
+
+    <div class="search-row">
+      <input type="text" id="search-box" placeholder="Search SKU…" />
+    </div>
+
+    <div class="table-wrap">
+      <table class="sku-table">
+        <thead>
+          <tr><th>SKU</th><th>Expected</th><th>Counted</th><th>Status</th><th>Last scan</th></tr>
+        </thead>
+        <tbody id="sku-tbody"></tbody>
+      </table>
+    </div>
+
+    <div class="btn-row">
+      <button class="secondary" id="export-btn" type="button">Export count CSV</button>
+      <button class="danger" id="reset-btn" type="button">Reset all counts</button>
+    </div>
+  </section>
+</main>
+
+<footer class="app-footer">
+  TPT Inventory is a product of <a href="https://tptsolutions.co.nz" target="_blank" rel="noopener">TPT Solutions</a> —
+  runs entirely on your device, works offline once loaded, your SKU list never leaves your phone or laptop.
+  <br />
+  More tools at <a href="https://tptsolutions.co.nz" target="_blank" rel="noopener">tptsolutions.co.nz</a>.
+</footer>
+
+<dialog id="about-dialog">
+  <h3>About TPT Inventory</h3>
+  <p>TPT Inventory is an offline barcode stock counting app by
+     <a href="https://tptsolutions.co.nz" target="_blank" rel="noopener">TPT Solutions</a>.</p>
+  <p><strong>Privacy:</strong> your SKU list and scan counts are stored only in this browser
+     (IndexedDB), on this device. Nothing is uploaded anywhere. Once loaded, the app keeps working
+     with no internet connection — export a CSV at the end of your count to back up or reconcile.</p>
+  <p>Supports QR, Data Matrix, Code 128, Code 39, EAN-13, and UPC-A.</p>
+  <p>Questions or feedback: visit <a href="https://tptsolutions.co.nz" target="_blank" rel="noopener">tptsolutions.co.nz</a>.</p>
+  <div class="close-row"><button class="primary" id="about-close" type="button">Close</button></div>
+</dialog>
+
+<script type="module" src="main.js"></script>
+</body>
+</html>
