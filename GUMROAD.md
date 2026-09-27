@@ -35,7 +35,9 @@ Small shops, warehouses, and market/pop-up sellers who need a fast, reliable sto
 
 ### How it's delivered
 Your purchase is a ZIP download containing:
-- **The Windows installer** (`.msi`/`.exe`) — double-click to install, run it like any desktop app. No internet connection needed after install.
+- **Desktop installers** — Windows (`.exe`/`.msi`), macOS (`.dmg`, universal:
+  Apple Silicon and Intel), and Linux (`.deb`/`.rpm`/`.AppImage`). Install
+  like any desktop app. No internet connection needed after install.
 - **A self-host bundle** for phone/tablet use — drag one folder onto a free instant-hosting page (steps included in the download) to get it on a phone or tablet for walking the floor.
 
 Nothing about this product depends on any ongoing service from us — once installed (or self-hosted), it's yours to keep working indefinitely.
@@ -47,6 +49,9 @@ QR Code, Data Matrix, Code 128, Code 39, EAN-13, and UPC-A.
 
 **Does it need WiFi on the warehouse floor?**
 No — after installing, it works fully offline.
+
+**macOS says the app "can't be opened" or is from an "unidentified developer"?**
+The app isn't code-signed with an Apple Developer certificate. On first launch, right-click the app and choose **Open**, or go to System Settings → Privacy & Security → "Open Anyway". After that it opens normally.
 
 **Can multiple people count at once?**
 Yes — install the desktop app or the self-hosted phone/tablet version on each device; each tracks its own local copy. Export each device's CSV and merge/reconcile at the end (a full multi-device live sync is a possible future upgrade, not included in v1).

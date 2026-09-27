@@ -1,9 +1,9 @@
 # TPT Inventory
 
 Offline barcode stock counting for small shops and warehouses. Import a SKU
-list, scan items with a camera, and track counts. Ships as a Windows
-desktop installer (Mac/Linux via Tauri too, once built on those platforms),
-with a self-hostable web bundle included for phone/tablet floor-walking.
+list, scan items with a camera, and track counts. Ships as desktop
+installers for Windows, macOS (universal), and Linux, with a
+self-hostable web bundle included for phone/tablet floor-walking.
 Built on the [`tpt-barcode`](https://github.com/tpt-solutions/tpt-barcode)
 engine.
 
