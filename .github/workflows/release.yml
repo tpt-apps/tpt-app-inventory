@@ -19,6 +19,8 @@ jobs:
         include:
           - platform: windows-latest
           - platform: macos-latest
+            # Universal build so one dmg runs on both Apple Silicon and Intel Macs
+            args: --target universal-apple-darwin
           - platform: ubuntu-22.04
 
     runs-on: ${{ matrix.platform }}
@@ -34,7 +36,7 @@ jobs:
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
         with:
-          targets: wasm32-unknown-unknown
+          targets: ${{ matrix.platform == 'macos-latest' && 'wasm32-unknown-unknown,aarch64-apple-darwin,x86_64-apple-darwin' || 'wasm32-unknown-unknown' }}
 
       - name: Cache cargo
         uses: Swatinem/rust-cache@v2
@@ -55,6 +57,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
+          args: ${{ matrix.args }}
           tagName: app-v__VERSION__
           releaseName: "TPT Inventory v__VERSION__"
           releaseBody: "See CHANGELOG.md for details."
